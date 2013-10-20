@@ -29,12 +29,13 @@ def gradient_descent(theta_0, theta_1, x, y, learning_rate):
     """
     partial_deriv_0 = (float(1)/len(x))*sum([(hypothesis(theta_0, theta_1, x_val) - y_val) for x_val, y_val in zip(x,y)])
     partial_deriv_1 = (float(1)/len(x))*sum([((hypothesis(theta_0, theta_1, x_val) - y_val)*x_val) for x_val, y_val in zip(x,y)])
-    print partial_deriv_0
-    print partial_deriv_1
+
     ## Elementary attempt at breaking out of the recursion if we reach a minimum
+    # Note - doesn't really work, will fix as the course progresses (I'd have thought)
     while math.fabs(partial_deriv_0) > float(theta_0+1) or math.fabs(partial_deriv_1) > float(theta_1 + 1):
         theta_0 = theta_0 - learning_rate * partial_deriv_0
         theta_1 = theta_1 - learning_rate * partial_deriv_1
+        # Allows us to see what's going on
         print "Intercept : ", theta_0
         print "Gradient : ", theta_1
         time.sleep(0.5)
@@ -46,5 +47,5 @@ def gradient_descent(theta_0, theta_1, x, y, learning_rate):
 ## Let's see how quickly we can get a simple linear relationship
 x = range(100)
 y = [i*3 - 8 for i in range(10)]
-z = gradient_descent(0, 0, x, y, 0.01)
-print z
+final_result_tuple = gradient_descent(0, 0, x, y, 0.01)
+print final_result_tuple
