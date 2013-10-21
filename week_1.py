@@ -33,9 +33,11 @@ def gradient_descent(theta_0, theta_1, x, y, learning_rate):
     while math.fabs(partial_deriv_0) > math.fabs(float(theta_0+1)) or math.fabs(partial_deriv_1) > math.fabs(float(theta_1 + 1)):
         theta_0 = theta_0 - (learning_rate * partial_deriv_0)
         theta_1 = theta_1 - (learning_rate * partial_deriv_1)
-        plt.plot(x, (x*int(theta_1)) + theta_0)
+        #print "Intercept is now : ", theta_0
+        #print "Gradient is now : ", theta_1
+        plt.plot(x, (x*theta_1) + theta_0)
         plt.draw()
-        time.sleep(1)
+        #time.sleep(1)
 
         gradient_descent(theta_0, theta_1, x, y, learning_rate)
 
@@ -43,10 +45,10 @@ def gradient_descent(theta_0, theta_1, x, y, learning_rate):
    
 ### An example calculation
 ## Let's see how quickly we can get a simple linear relationship
-x = np.arange(20)
-y = [i*2 + 1 for i in np.arange(20)]
+x = np.arange(-20, 20)
+y = [i*-0.32 + 0.1 for i in np.arange(-20,20)]
 fig = plt.figure()
-plt.axis([-10,10,0,10])
+plt.axis([-2,2,-2,2])
 plt.ion()
 plt.show()
 plt.plot(x,y)
