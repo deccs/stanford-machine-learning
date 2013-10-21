@@ -18,7 +18,7 @@ def cost_function(theta_0, theta_1, x, y):
     Basically, the sum of the squared differences between the training points and the hypothesis, divided by the number of points.
     Kind of like an average of absolute distance of the points from the hypothesis
     """
-    total_cost = (float(total_cost)/(2*len(x))) * sum([(hypothesis(theta_0, theta_1, x_val) - y_val)**2 for x_val, y_val in zip(x,y)])
+    total_cost = (float(1))/(2*len(x)) * sum([(hypothesis(theta_0, theta_1, x_val) - y_val)**2 for x_val, y_val in zip(x,y)])
     return total_cost
 
 def gradient_descent(theta_0, theta_1, x, y, learning_rate):
@@ -36,8 +36,10 @@ def gradient_descent(theta_0, theta_1, x, y, learning_rate):
         #print "Intercept is now : ", theta_0
         #print "Gradient is now : ", theta_1
         plt.plot(x, (x*theta_1) + theta_0)
+        legend_list.append("Error : " +  str(cost_function(theta_0, theta_1, x, y))[:6])
+        plt.legend(legend_list, loc='upper center', fancybox=True)
         plt.draw()
-        #time.sleep(1)
+        time.sleep(1)
 
         gradient_descent(theta_0, theta_1, x, y, learning_rate)
 
@@ -50,6 +52,8 @@ y = [i*-0.32 + 0.1 for i in np.arange(-20,20)]
 fig = plt.figure()
 plt.axis([-2,2,-2,2])
 plt.ion()
+legend_list = ['Actual line']
+plt.legend(legend_list, loc='upper center', fancybox=True)
 plt.show()
 plt.plot(x,y)
 final_result_tuple = gradient_descent(0, 0, x, y, 0.01)
