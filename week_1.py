@@ -3,7 +3,9 @@
 import numpy as np
 import time
 import math
+import random
 import matplotlib.pyplot as plt
+import datetime
 
 def hypothesis(theta_0, theta_1, x):
     """
@@ -48,7 +50,9 @@ def gradient_descent(theta_0, theta_1, x, y, learning_rate):
 ### An example calculation
 ## Let's see how quickly we can get a simple linear relationship
 x = np.arange(-20, 20)
-y = [i*-0.32 + 0.1 for i in np.arange(-20,20)]
+theta_0 = random.random()*-1 if int(str(datetime.datetime.now())[-1]) > 5 else random.random()
+theta_1 = random.random()*-1 if int(str(datetime.datetime.now())[-1]) > 5 else random.random()
+y = [i*theta_1 + theta_0 for i in np.arange(-20,20)]
 fig = plt.figure()
 plt.axis([-2,2,-2,2])
 plt.ion()
@@ -56,5 +60,5 @@ legend_list = ['Actual line']
 plt.legend(legend_list, loc='upper center', fancybox=True)
 plt.show()
 plt.plot(x,y)
-final_result_tuple = gradient_descent(0, 0, x, y, 0.01)
+final_result_tuple = gradient_descent(0, 0, x, y, 0.005)
 print final_result_tuple
