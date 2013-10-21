@@ -11,4 +11,9 @@ Any questions, please direct to matthewsharpe3@gmail.com
 
 ## To-do
 
-Would love to add real time graph updates to show the cost function varying with time along with the changing straight line guesses. Rumour has it that matplotlib is the way but I obviously haven't done that yet. -- Have now done this, shows I've got some fairly major problems. Currently the most likely candidate is the calculation of the partial derivatives. I've derived these by hand and they look legit, currently investigating my (supposed) understanding of the zip function and list comprehension.
+-- Would love to add real time graph updates to show the cost function varying with time along with the changing straight line guesses. Rumour has it that matplotlib is the way but I obviously haven't done that yet.
+
+-- Have now done this, shows I've got some fairly major problems. Currently the most likely candidate is the calculation of the partial derivatives. I've derived these by hand and they look legit, currently investigating my (supposed) understanding of the zip function and list comprehension.
+
+-- Turned out, the problem was in my shoddy use of integers and floats, am now using ints in all the right places (rarely) and floats wherever I should. There's still a problem with the termination of iteration, maintaining hope that in future lectures this'll be covered (I'll look at it again if it isn't by the end of this week's lectures). Also, can very clearly see how important the learning rate is!
+
