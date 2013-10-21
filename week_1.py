@@ -3,6 +3,7 @@
 import numpy as np
 import time
 import math
+import matplotlib.pyplot as plt
 
 def hypothesis(theta_0, theta_1, x):
     """
@@ -30,19 +31,24 @@ def gradient_descent(theta_0, theta_1, x, y, learning_rate):
     ## Elementary attempt at breaking out of the recursion if we reach a minimum
     # Note - doesn't really work, will fix as the course progresses (I'd have thought)
     while math.fabs(partial_deriv_0) > math.fabs(float(theta_0+1)) or math.fabs(partial_deriv_1) > math.fabs(float(theta_1 + 1)):
-        theta_0 = theta_0 - learning_rate * partial_deriv_0
-        theta_1 = theta_1 - learning_rate * partial_deriv_1
-        # Allows us to see what's going on
-        print "Intercept : ", theta_0
-        print "Gradient : ", theta_1
+        theta_0 = theta_0 - (learning_rate * partial_deriv_0)
+        theta_1 = theta_1 - (learning_rate * partial_deriv_1)
+        plt.plot(x, (x*int(theta_1)) + theta_0)
+        plt.draw()
         time.sleep(1)
+
         gradient_descent(theta_0, theta_1, x, y, learning_rate)
 
     return (theta_0, theta_1)
    
 ### An example calculation
 ## Let's see how quickly we can get a simple linear relationship
-x = range(100)
-y = [i*3 - 8 for i in range(10)]
-final_result_tuple = gradient_descent(0, 0, x, y, 0.05)
+x = np.arange(20)
+y = [i*2 + 1 for i in np.arange(20)]
+fig = plt.figure()
+plt.axis([-10,10,0,10])
+plt.ion()
+plt.show()
+plt.plot(x,y)
+final_result_tuple = gradient_descent(0, 0, x, y, 0.01)
 print final_result_tuple
