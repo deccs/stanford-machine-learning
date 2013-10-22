@@ -62,7 +62,9 @@ legend_list = ['Actual line']
 plt.legend(legend_list, loc='upper center', fancybox=True)
 plt.show()
 plt.plot(x,y)
-final_result_tuple = gradient_descent(random.random(), random.random(), x, y, float(len(x))/100)
+learning_rate = float(len(x))/500
+print learning_rate
+final_result_tuple = gradient_descent(random.random(), random.random(), x, y, learning_rate)
 print "Gradient was : ", theta_1
 print "Intercept was : ", theta_0
 print "Gradient guessed : ", final_result_tuple[1]
