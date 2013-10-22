@@ -32,27 +32,29 @@ def gradient_descent(theta_0, theta_1, x, y, learning_rate):
 
     ## Elementary attempt at breaking out of the recursion if we reach a minimum
     # Note - doesn't really work, will fix as the course progresses (I'd have thought)
-    while math.fabs(partial_deriv_0) > math.fabs(float(theta_0+1)) or math.fabs(partial_deriv_1) > math.fabs(float(theta_1 + 1)):
+    if cost_function(theta_0, theta_1, x, y) > 0.003:
         theta_0 = theta_0 - (learning_rate * partial_deriv_0)
         theta_1 = theta_1 - (learning_rate * partial_deriv_1)
         #print "Intercept is now : ", theta_0
         #print "Gradient is now : ", theta_1
         plt.plot(x, (x*theta_1) + theta_0)
+        if len(legend_list) > 4:
+            del legend_list[1]
         legend_list.append("Error : " +  str(cost_function(theta_0, theta_1, x, y))[:6])
         plt.legend(legend_list, loc='upper center', fancybox=True)
         plt.draw()
-        time.sleep(1)
+        #time.sleep(1)
 
-        gradient_descent(theta_0, theta_1, x, y, learning_rate)
-
-    return (theta_0, theta_1)
+        return gradient_descent(theta_0, theta_1, x, y, learning_rate)
+    else:
+        return (theta_0, theta_1)
    
 ### An example calculation
 ## Let's see how quickly we can get a simple linear relationship
-x = np.arange(-20, 20)
+x = np.arange(-10, 10)
 theta_0 = random.random()*-1 if int(str(datetime.datetime.now())[-1]) > 5 else random.random()
 theta_1 = random.random()*-1 if int(str(datetime.datetime.now())[-1]) > 5 else random.random()
-y = [i*theta_1 + theta_0 for i in np.arange(-20,20)]
+y = [i*theta_1 + theta_0 for i in x]
 fig = plt.figure()
 plt.axis([-2,2,-2,2])
 plt.ion()
@@ -60,5 +62,8 @@ legend_list = ['Actual line']
 plt.legend(legend_list, loc='upper center', fancybox=True)
 plt.show()
 plt.plot(x,y)
-final_result_tuple = gradient_descent(0, 0, x, y, 0.005)
-print final_result_tuple
+final_result_tuple = gradient_descent(random.random(), random.random(), x, y, float(len(x))/100)
+print "Gradient was : ", theta_1
+print "Intercept was : ", theta_0
+print "Gradient guessed : ", final_result_tuple[1]
+print "Intercept guessed : ", final_result_tuple[0]
