@@ -70,7 +70,7 @@ plt.plot(x,y)
 
 ## Experimentally verified as being reasonable - will likely change in future iterations
 
-learning_rate = float(1)/len(x)
+learning_rate = float(1)/20
 
 # Generate result
 final_result_tuple = gradient_descent(random.random(), random.random(), x, y, learning_rate)

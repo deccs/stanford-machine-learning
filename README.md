@@ -17,3 +17,9 @@ Any questions, please direct to matthewsharpe3@gmail.com
 
 -- Turned out, the problem was in my shoddy use of integers and floats, am now using ints in all the right places (rarely) and floats wherever I should. There's still a problem with the termination of iteration, maintaining hope that in future lectures this'll be covered (I'll look at it again if it isn't by the end of this week's lectures). Also, can very clearly see how important the learning rate is!
 
+-- Termination of iteration taken care of - just needed to remember what we were doing in the first place, minimizing the cost function! Have set a lower limit on that value, now there are only 2 things I can see to do...
+
+-- Work out how to properly set the learning rate, am going to move ahead in the lectures and see if this is covered.
+
+-- Work out why, if I'm going to converge, I always get the gradient almost immediately and then work my way towards the intercept. I've only noticed this because of graphing it but it's very odd. As an initial thought - I reckon that, as the cost function multiplies the gradient partial derivative term (theta_1) by the training input value (x(i)) and takes absolute values of difference, that by only using integer |x| >= 1 I've caused this. When trying to minimize, as there are multiplicative effects the sum in the partial derivative term for theta_1 will be bigger and so fixing this will be more beneficial in minimizing the error function than fixing the intercept
+
