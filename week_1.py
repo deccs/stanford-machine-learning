@@ -30,20 +30,18 @@ def gradient_descent(theta_0, theta_1, x, y, learning_rate):
     partial_deriv_0 = (float(1)/len(x))*sum([(hypothesis(theta_0, theta_1, x_val) - y_val) for x_val, y_val in zip(x,y)])
     partial_deriv_1 = (float(1)/len(x))*sum([((hypothesis(theta_0, theta_1, x_val) - y_val)*x_val) for x_val, y_val in zip(x,y)])
 
-    ## Elementary attempt at breaking out of the recursion if we reach a minimum
-    # Note - doesn't really work, will fix as the course progresses (I'd have thought)
+    ## How accurate does the prediction need to be - change the maximum acceptable cost function value here to determine
     if cost_function(theta_0, theta_1, x, y) > 0.003:
         theta_0 = theta_0 - (learning_rate * partial_deriv_0)
         theta_1 = theta_1 - (learning_rate * partial_deriv_1)
-        #print "Intercept is now : ", theta_0
-        #print "Gradient is now : ", theta_1
-        plt.plot(x, (x*theta_1) + theta_0)
+        plt.plot(x, x*float(theta_1) + theta_0)
+        ## Working with limited space legend so only keep the last 5
         if len(legend_list) > 4:
+            ## We want to leave the original line legend
             del legend_list[1]
         legend_list.append("Error : " +  str(cost_function(theta_0, theta_1, x, y))[:6])
         plt.legend(legend_list, loc='upper center', fancybox=True)
         plt.draw()
-        #time.sleep(1)
 
         return gradient_descent(theta_0, theta_1, x, y, learning_rate)
     else:
@@ -51,10 +49,17 @@ def gradient_descent(theta_0, theta_1, x, y, learning_rate):
    
 ### An example calculation
 ## Let's see how quickly we can get a simple linear relationship
+################################################################
+
+## Random values for the intercept and gradient
+theta_0 = -1*random.random() if int(str(datetime.datetime.now())[-1]) > 4 else random.random()
+theta_1 = -1*random.random() if int(str(datetime.datetime.now())[-1]) > 4 else random.random()
+
+## Initialize the training examples
 x = np.arange(-10, 10)
-theta_0 = random.random()*-1 if int(str(datetime.datetime.now())[-1]) > 5 else random.random()
-theta_1 = random.random()*-1 if int(str(datetime.datetime.now())[-1]) > 5 else random.random()
 y = [i*theta_1 + theta_0 for i in x]
+
+## Plotting initialization
 fig = plt.figure()
 plt.axis([-2,2,-2,2])
 plt.ion()
@@ -62,8 +67,12 @@ legend_list = ['Actual line']
 plt.legend(legend_list, loc='upper center', fancybox=True)
 plt.show()
 plt.plot(x,y)
-learning_rate = float(len(x))/500
-print learning_rate
+
+## Experimentally verified as being reasonable - will likely change in future iterations
+
+learning_rate = float(1)/len(x)
+
+# Generate result
 final_result_tuple = gradient_descent(random.random(), random.random(), x, y, learning_rate)
 print "Gradient was : ", theta_1
 print "Intercept was : ", theta_0
